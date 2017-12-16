@@ -21,6 +21,15 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="mirror.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mmdm37usb.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ftd2xx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -29,5 +38,11 @@
     <ClCompile Include="okomirror.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="FTD2XX.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FTD2XX.dll" />
   </ItemGroup>
 </Project>
