@@ -75,18 +75,24 @@ int addr[TOTAL_NR_OF_CHANNELS]={10,18,13,9,5,6,14,19,17,12,11,1,3,2,4,7,8,15,16,
 // Table of correspondence between the order numbers of the mirror's actuators and
 // the order numbers of outputs of DAC-40-USB unit
 
-BOOL init_dac()
+BOOL init_dac(int index)
 // Initialization of DAC-40-USB control unit
 {
 	DWORD ndevs=0;
- 	if ((FT_ListDevices(&ndevs,NULL,FT_LIST_NUMBER_ONLY)==FT_OK) && ndevs)
+ 	if ((FT_ListDevices(&ndevs,NULL,FT_LIST_NUMBER_ONLY)==FT_OK))
 	{
-		int index=0; // use the first device from the list
+		if (index >= ndevs) {
+			printf("\nTrying to connect with a non-existing device id %d.\n %d device(s) are found on this computer.\n",index, ndevs);
+			return FALSE;
+		}
+			
 		char sn[16],dsc[64];
                                 // Get the serial number
 		FT_ListDevices((PVOID)index,sn,FT_LIST_BY_INDEX|FT_OPEN_BY_SERIAL_NUMBER);
                                 // Get the description
 		FT_ListDevices((PVOID)index,dsc,FT_LIST_BY_INDEX|FT_OPEN_BY_DESCRIPTION);
+		printf("\nDevice serial: %s\n",sn);
+		printf("\nDevice description: %s\n", dsc);
 		FT_STATUS fs = FT_Open(index, &com);
 		if(fs!=FT_OK)
         {                       // Error handling
@@ -99,7 +105,7 @@ BOOL init_dac()
 	}
 	else
 	{
-		printf("\nDevice not found\n");
+		printf("\nDevices enumeration failed. Check your driver installation.\n");
 		return FALSE;
 	}
 	return TRUE;
