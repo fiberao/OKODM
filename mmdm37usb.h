@@ -1,7 +1,4 @@
 /**************************************************** 
- * FileName: mirror37usb.h
- * Description:  
- *
  * (c) 2004, FlexibleOptical 
  *           Gleb Vdovin & Mikhail Loktev
  ****************************************************
